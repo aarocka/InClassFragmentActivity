@@ -2,6 +2,7 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,22 @@ class MainActivity : AppCompatActivity() {
         val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
         typedArray.recycle()
 
+        //log the imageArray
+        for (i in imageArray.indices) {
+            Log.d( "onCreate: ", imageArray[i].toString());
+        }
+
         // Attach an instance of ImageDisplayFragment using factory method
+        // newInstance() to the FrameLayout in activity_main.xml
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainerView, ImageDisplayFragment.newInstance(imageArray))
+            .commit()
+
+
+
+
+
 
     }
 }
